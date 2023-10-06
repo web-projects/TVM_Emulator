@@ -33,7 +33,7 @@ namespace TVMEmulator
 
             SetLogging();
 
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
 
         private static void SetLogging()

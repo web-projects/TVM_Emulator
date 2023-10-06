@@ -10,10 +10,11 @@ using TVMEmulator.emulation;
 using TVMEmulator.helpers;
 using TVMEmulator.helpers.extensions;
 using TVMEmulator.helpers.session;
+using TVMEmulator.Properties;
 
 namespace TVMEmulator
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private string messageWrapLength = ConfigurationManager.AppSettings["MessageWrapLength"] ?? "260";
         private readonly int lineWrapLength;
@@ -25,7 +26,7 @@ namespace TVMEmulator
         private string adaMessage;
         private string adaKeyPressed;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             sessionData = new SessionData(RefreshEvent);
@@ -180,6 +181,36 @@ namespace TVMEmulator
                 // Start ADA Mode
                 sessionEmulation.StartAdaMode();
             }
+        }
+
+        private void OnFormLoad(object sender, EventArgs e)
+        {
+            if (Settings.Default.MainForm_HasSetDefaults)
+            {
+                this.WindowState = Settings.Default.MainForm_WindowState;
+                this.Location = Settings.Default.MainForm_Location;
+                this.Size = Settings.Default.MainForm_Size;
+            }
+        }
+
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Default.MainForm_WindowState = this.WindowState;
+
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                Settings.Default.MainForm_Location = this.Location;
+                Settings.Default.MainForm_Size = this.Size;
+            }
+            else
+            {
+                Settings.Default.MainForm_Location = this.RestoreBounds.Location;
+                Settings.Default.MainForm_Size = this.RestoreBounds.Size;
+            }
+
+            Settings.Default.MainForm_HasSetDefaults = true;
+
+            Settings.Default.Save();
         }
     }
 }

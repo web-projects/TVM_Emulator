@@ -22,5 +22,53 @@ namespace TVMEmulator.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MainForm_HasSetDefaults {
+            get {
+                return ((bool)(this["MainForm_HasSetDefaults"]));
+            }
+            set {
+                this["MainForm_HasSetDefaults"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState MainForm_WindowState {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["MainForm_WindowState"]));
+            }
+            set {
+                this["MainForm_WindowState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point MainForm_Location {
+            get {
+                return ((global::System.Drawing.Point)(this["MainForm_Location"]));
+            }
+            set {
+                this["MainForm_Location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size MainForm_Size {
+            get {
+                return ((global::System.Drawing.Size)(this["MainForm_Size"]));
+            }
+            set {
+                this["MainForm_Size"] = value;
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace TVMEmulator
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -48,6 +48,9 @@ namespace TVMEmulator
             // 
             // mainOutput
             // 
+            this.mainOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mainOutput.Location = new System.Drawing.Point(12, 238);
             this.mainOutput.Name = "mainOutput";
             this.mainOutput.ReadOnly = true;
@@ -170,7 +173,7 @@ namespace TVMEmulator
             this.ucTimings1.Size = new System.Drawing.Size(342, 59);
             this.ucTimings1.TabIndex = 14;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -188,8 +191,10 @@ namespace TVMEmulator
             this.Controls.Add(this.receiverPort);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mainOutput);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "TVM EMULATOR";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
+            this.Load += new System.EventHandler(this.OnFormLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 
