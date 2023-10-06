@@ -20,6 +20,8 @@
     {
         protected readonly object lockObj = new object();
 
+        public abstract void ClearLog();
+
         // DEBUG LOGGING
         public abstract System.Threading.Tasks.Task debug(string message);
         // INFO LOGGING

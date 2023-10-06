@@ -28,9 +28,14 @@ namespace TVMEmulator
 
         public MainForm()
         {
-            InitializeComponent();
-            sessionData = new SessionData(RefreshEvent);
             lineWrapLength = Convert.ToInt16(messageWrapLength);
+            InitializeComponent();
+            SetEnvironment();
+        }
+
+        private void SetEnvironment()
+        {
+            sessionData = new SessionData(RefreshEvent);
         }
 
         private void AdaModeExecute(object sender, EventArgs e)
@@ -211,6 +216,12 @@ namespace TVMEmulator
             Settings.Default.MainForm_HasSetDefaults = true;
 
             Settings.Default.Save();
+        }
+
+        private void ClearLog(object sender, EventArgs e)
+        {
+            mainOutput.Text = string.Empty;
+            Logger.ClearLog();
         }
     }
 }

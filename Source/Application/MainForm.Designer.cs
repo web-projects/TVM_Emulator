@@ -44,6 +44,8 @@ namespace TVMEmulator
             this.label6 = new System.Windows.Forms.Label();
             this.adaMessageTxt = new System.Windows.Forms.RichTextBox();
             this.ucTimings1 = new TVMEmulator.forms.ucTimings();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainOutput
@@ -173,11 +175,32 @@ namespace TVMEmulator
             this.ucTimings1.Size = new System.Drawing.Size(342, 59);
             this.ucTimings1.TabIndex = 14;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(551, 38);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Clear Log";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(611, 33);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 22);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.ClearLog);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 583);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.adaMessageTxt);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.sessionIdLbl);
@@ -216,6 +239,8 @@ namespace TVMEmulator
         private ucTimings ucTimings1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.RichTextBox adaMessageTxt;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button1;
     }
 }
 

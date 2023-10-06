@@ -58,5 +58,9 @@ namespace Common.LoggerManager
             }
             return Task.FromResult(0);
         }
+
+        public override void ClearLog()
+        {
+        }
     }
 }

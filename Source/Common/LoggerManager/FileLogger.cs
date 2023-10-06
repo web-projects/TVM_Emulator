@@ -27,6 +27,14 @@ namespace Common.LoggerManager
             }
         }
 
+        public override void ClearLog()
+        {
+            if (File.Exists(filePath) && new FileInfo(filePath).Length > 0) 
+            {
+                File.WriteAllText(filePath, string.Empty);
+            }
+        }
+
         private Task LoggerWriter(string type, string message)
         {
             if (type == null) throw new ArgumentNullException("LOGGER: type");

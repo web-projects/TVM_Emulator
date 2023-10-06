@@ -29,6 +29,14 @@ namespace Common.LoggerManager
             eventLoggerPath = filepath;
         }
 
+        public static void ClearLog()
+        {
+            if (!string.IsNullOrWhiteSpace(fileLoggerPath) && fileLogger != null)
+            {
+                fileLogger.ClearLog();
+            }
+        }
+
         // DEBUG LOGGING
         public static void debug(string message, LogTarget target = LogTarget.File)
         {
