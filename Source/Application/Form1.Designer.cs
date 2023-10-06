@@ -58,7 +58,7 @@ namespace TVMEmulator
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 29);
+            this.label1.Location = new System.Drawing.Point(30, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 1;
@@ -75,7 +75,7 @@ namespace TVMEmulator
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 65);
+            this.label2.Location = new System.Drawing.Point(30, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 3;
@@ -83,7 +83,7 @@ namespace TVMEmulator
             // 
             // adaModeBtn
             // 
-            this.adaModeBtn.Location = new System.Drawing.Point(123, 169);
+            this.adaModeBtn.Location = new System.Drawing.Point(120, 202);
             this.adaModeBtn.Name = "adaModeBtn";
             this.adaModeBtn.Size = new System.Drawing.Size(56, 22);
             this.adaModeBtn.TabIndex = 4;
@@ -102,7 +102,7 @@ namespace TVMEmulator
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(32, 102);
+            this.label3.Location = new System.Drawing.Point(30, 102);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 5;
@@ -119,7 +119,7 @@ namespace TVMEmulator
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 169);
+            this.label4.Location = new System.Drawing.Point(30, 207);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 7;
@@ -128,7 +128,7 @@ namespace TVMEmulator
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 142);
+            this.label5.Location = new System.Drawing.Point(30, 142);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 13);
             this.label5.TabIndex = 9;
@@ -147,15 +147,15 @@ namespace TVMEmulator
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(32, 210);
+            this.label6.Location = new System.Drawing.Point(26, 173);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 13);
+            this.label6.Size = new System.Drawing.Size(87, 13);
             this.label6.TabIndex = 11;
-            this.label6.Text = "Message";
+            this.label6.Text = "Display Message";
             // 
             // adaMessageTxt
             // 
-            this.adaMessageTxt.Location = new System.Drawing.Point(120, 210);
+            this.adaMessageTxt.Location = new System.Drawing.Point(120, 169);
             this.adaMessageTxt.Name = "adaMessageTxt";
             this.adaMessageTxt.Size = new System.Drawing.Size(547, 22);
             this.adaMessageTxt.TabIndex = 12;
