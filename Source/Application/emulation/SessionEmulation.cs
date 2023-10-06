@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.LoggerManager;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Windows.Forms;
@@ -82,11 +83,12 @@ namespace TVMEmulator.emulation
             switch (action)
             {
                 case "Initialize":
-                output = LinkRequestGetSession.GenerateGetSessionRequest(null, CustID, Password);
-                break;
+                    output = LinkRequestGetSession.GenerateGetSessionRequest(null, CustID, Password);
+                    Logger.info("Session Initialization Request.");
+                    break;
                 default:
-                MessageBox.Show($"Action: {action} is not yet implemented.");
-                break;
+                    MessageBox.Show($"Action: {action} is not yet implemented.");
+                    break;
             }
 
             return output;
@@ -179,21 +181,23 @@ namespace TVMEmulator.emulation
         public void StartAdaMode()
         {
             adaMode = new AdaMode(custId, Password, SessionId);
-
             string jsonRequest = adaMode.GenerateRequest(AdaActionCode.StartAdaMode.GetStringValue(), "Pay Now?");
             SubmitRequest(jsonRequest);
+            Logger.info($"{AdaActionCode.StartAdaMode.GetStringValue()} Request.");
         }
 
         public void UpdateMessage(string message)
         {
             string jsonRequest = adaMode.GenerateRequest(AdaActionCode.UpdateMessage.GetStringValue(), message);
             SubmitRequest(jsonRequest);
+            Logger.info($"ADA {AdaActionCode.UpdateMessage.GetStringValue()} Request.");
         }
 
         public void StopAdaMode()
         {
             string jsonRequest = adaMode.GenerateRequest(AdaActionCode.EndAdaMode.GetStringValue(), "");
             SubmitRequest(jsonRequest);
+            Logger.info($"{AdaActionCode.EndAdaMode.GetStringValue()} Request.");
         }
 
         #endregion --- ADA MODE IMPLEMENTATION ---
