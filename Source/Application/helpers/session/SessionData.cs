@@ -208,7 +208,9 @@ namespace TVMEmulator.helpers.session
                 foreach (var bdata in _messages)
                 {
                     if (bdata.type.Equals(messType, StringComparison.OrdinalIgnoreCase))
+                    {
                         data.Add(bdata);
+                    }
                 }
             }
             return data;

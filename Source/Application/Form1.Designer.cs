@@ -142,7 +142,7 @@ namespace TVMEmulator
             this.sessionIdLbl.Size = new System.Drawing.Size(56, 13);
             this.sessionIdLbl.TabIndex = 10;
             this.sessionIdLbl.Text = "not-yet-set";
-            this.sessionIdLbl.TextChanged += new System.EventHandler(this.OnTextChanged);
+            this.sessionIdLbl.TextChanged += new System.EventHandler(this.OnSessionIdTextChanged);
             // 
             // label6
             // 

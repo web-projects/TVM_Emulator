@@ -49,9 +49,11 @@ namespace TVMEmulator
             SetControlEnable(false);
             sessionIdLbl.Text = string.Empty;
             mainOutput.Text = string.Empty;
+            adaKeyPressed = string.Empty;
             adaMessage = adaMessageTxt.Text;
             sessionEmulation = new SessionEmulation(RefreshEventWindow);
             sessionEmulation.SetTimingControls(ucTimings1);
+            sessionData.ClearButtonData();
             sessionEmulation.StartEmulation(custidTB.Text, passwordTB.Text, "Initialize");
         }
 
@@ -171,7 +173,7 @@ namespace TVMEmulator
             return worker.ToString();
         }
 
-        private void OnTextChanged(object sender, EventArgs e)
+        private void OnSessionIdTextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(sessionIdLbl.Text) && sessionEmulation is { })
             {
