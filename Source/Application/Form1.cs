@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TVMEmulator.emulation;
 using TVMEmulator.helpers;
@@ -146,7 +147,8 @@ namespace TVMEmulator
 
         private string PrepareMessageforLogging(string message)
         {
-            StringBuilder worker = new StringBuilder(message.Replace(" ", "").Replace("\n", "").Replace("\r", ""));
+            string temp = Regex.Replace(message, @"\s+", " ");
+            StringBuilder worker = new StringBuilder(temp.Replace("\n", "").Replace("\r", ""));
             int i = 0;
 
             try
