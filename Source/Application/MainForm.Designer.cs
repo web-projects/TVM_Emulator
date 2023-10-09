@@ -46,6 +46,9 @@ namespace TVMEmulator
             this.ucTimings1 = new TVMEmulator.forms.ucTimings();
             this.label7 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainOutput
@@ -56,7 +59,7 @@ namespace TVMEmulator
             this.mainOutput.Location = new System.Drawing.Point(12, 238);
             this.mainOutput.Name = "mainOutput";
             this.mainOutput.ReadOnly = true;
-            this.mainOutput.Size = new System.Drawing.Size(655, 333);
+            this.mainOutput.Size = new System.Drawing.Size(655, 311);
             this.mainOutput.TabIndex = 0;
             this.mainOutput.Text = "";
             // 
@@ -194,11 +197,30 @@ namespace TVMEmulator
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.ClearLog);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 561);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(682, 22);
+            this.statusStrip1.TabIndex = 15;
+            this.statusStrip1.Text = "RESPONSE:";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.Window;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 17);
+            this.toolStripStatusLabel1.Text = "Waiting ...";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 583);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.adaMessageTxt);
@@ -218,6 +240,8 @@ namespace TVMEmulator
             this.Text = "TVM EMULATOR";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
             this.Load += new System.EventHandler(this.OnFormLoad);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,6 +265,8 @@ namespace TVMEmulator
         private System.Windows.Forms.RichTextBox adaMessageTxt;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

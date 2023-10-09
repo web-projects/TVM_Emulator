@@ -9,7 +9,9 @@ using System.Windows.Forms;
 using TVMEmulator.emulation;
 using TVMEmulator.helpers;
 using TVMEmulator.helpers.extensions;
+using TVMEmulator.helpers.responses;
 using TVMEmulator.helpers.session;
+using TVMEmulator.Helpers.Responses;
 using TVMEmulator.Properties;
 
 namespace TVMEmulator
@@ -116,23 +118,28 @@ namespace TVMEmulator
             {
                 EventData eventData = events.Last();
                 // check for key press and send a message update
-                if (eventData is { } && eventData.name.Contains("DEVICE_KEY_PRESSED"))
+                if (eventData is { })
                 {
-                    Helpers.Responses.TCLinkResponse tcLinkResponse = Utilities.DeserializeLinkResponse(eventData.contents);
+                    RefreshEventWindowAndLogInfo(eventData.contents);
 
-                    // Got a key press
-                    helpers.responses.Response response = tcLinkResponse.Responses.First();
-                    helpers.responses.EventResponse eventResponse = response.EventResponse;
-                    string keyPressed = eventResponse.EventData.First();
-                    int keyValue = (int)((DeviceKeys)Enum.Parse(typeof(DeviceKeys), keyPressed));
-                    // Send new message to device with key just pressed
-                    if (keyValue > 0)
+                    if (eventData.name.Contains("DEVICE_KEY_PRESSED"))
                     {
-                        Logger.info($"DEVICE_KEY_PRESSED: {keyValue}");
-                        adaKeyPressed += $"{keyValue}";
-                        string message = $"{adaMessage}{adaKeyPressed}";
-                        SetAdaMessage(message);
-                        sessionEmulation.UpdateMessage(message);
+                        TCLinkResponse tcLinkResponse = Utilities.DeserializeLinkResponse(eventData.contents);
+
+                        // Got a key press
+                        Response response = tcLinkResponse.Responses.First();
+                        EventResponse eventResponse = response.EventResponse;
+                        string keyPressed = eventResponse.EventData.First();
+                        int keyValue = (int)((DeviceKeys)Enum.Parse(typeof(DeviceKeys), keyPressed));
+                        // Send new message to device with key just pressed
+                        if (keyValue > 0)
+                        {
+                            Logger.info($"DEVICE_KEY_PRESSED: {keyValue}");
+                            adaKeyPressed += $"{keyValue}";
+                            string message = $"{adaMessage}{adaKeyPressed}";
+                            SetAdaMessage(message);
+                            sessionEmulation.UpdateMessage(message);
+                        }
                     }
                 }
             }
@@ -147,10 +154,80 @@ namespace TVMEmulator
                 ));
                 return;
             }
-            string message = sessionEmulation?.GetSessionEmulationRefreshContent();
-            Logger.info(PrepareMessageforLogging(message));
+            string jsonResponse = sessionEmulation?.GetSessionEmulationRefreshContent();
+            Logger.info(PrepareMessageforLogging(jsonResponse));
+            mainOutput.Text += jsonResponse + "\r\n";
+            mainOutput.ScrollToBottom();
+            StatusResponseUpdate(jsonResponse);
+        }
+
+        public void RefreshEventWindow(string message)
+        {
+            if (mainOutput.InvokeRequired)
+            {
+                mainOutput.Invoke(new MethodInvoker(
+                    delegate { RefreshEventWindow(message); }
+                ));
+                return;
+            }
             mainOutput.Text += message + "\r\n";
             mainOutput.ScrollToBottom();
+        }
+
+        private void StatusResponseUpdate(string jsonResponse)
+        {
+            if (jsonResponse.Contains("Request Submitted"))
+            {
+                toolStripStatusLabel1.Text = "Waiting for response ...";
+            }
+            else if (jsonResponse.Contains("DALResponse"))
+            {
+                TCLinkResponse linkResponse = Utilities.DeserializeLinkResponse(jsonResponse);
+
+                foreach (Response response in linkResponse.Responses)
+                {
+                    // Initialize Response: check for errors
+                    if (response.DALResponse.Devices is { })
+                    {
+                        foreach (DeviceResponse deviceResponse in response.DALResponse.Devices)
+                        {
+                            if (deviceResponse.Errors is { })
+                            {
+                                foreach (ErrorValue error in deviceResponse.Errors)
+                                {
+
+                                    toolStripStatusLabel1.Text = $"ERROR: {error.Code}";
+
+                                }
+                            }
+                        }
+
+                        // get the session id 
+                        if (response.SessionResponse != null)
+                        {
+                            sessionId = response.SessionResponse.SessionID;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (response.DALActionResponse is { } actionResponse)
+                        {
+                            toolStripStatusLabel1.Text = $"RESPONSE: {actionResponse.Status} -> {actionResponse.Value}";
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (jsonResponse.Contains("DALActionResponse"))
+            {
+                TCLinkResponse linkResponse = Utilities.DeserializeLinkResponse(jsonResponse);
+                Response response = linkResponse.Responses.First();
+                if (response is { } && response.DALActionResponse is { } actionResponse)
+                {
+                    toolStripStatusLabel1.Text = $"RESPONSE: {actionResponse.Status}";
+                }
+            }
         }
 
         private string PrepareMessageforLogging(string message)
@@ -222,6 +299,12 @@ namespace TVMEmulator
         {
             mainOutput.Text = string.Empty;
             Logger.ClearLog();
+        }
+
+        private void RefreshEventWindowAndLogInfo(string message)
+        {
+            Logger.info(message);
+            RefreshEventWindow(message);
         }
     }
 }
