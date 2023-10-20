@@ -132,10 +132,11 @@ namespace TVMEmulator
                         string keyPressed = eventResponse.EventData.First();
                         int keyValue = (int)((DeviceKeys)Enum.Parse(typeof(DeviceKeys), keyPressed));
                         // Send new message to device with key just pressed
-                        if (keyValue > 0)
+                        if (keyValue >= 0)
                         {
-                            Logger.info($"DEVICE_KEY_PRESSED: {keyValue}");
-                            adaKeyPressed += $"{keyValue}";
+                            string keyValueString = keyPressed.Replace("KEY_", "");
+                            Logger.info($"DEVICE_KEY_PRESSED: {keyValueString}");
+                            adaKeyPressed += keyValueString;
                             string message = $"{adaMessage}{adaKeyPressed}";
                             SetAdaMessage(message);
                             sessionEmulation.UpdateMessage(message);
